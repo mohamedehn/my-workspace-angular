@@ -1,0 +1,16 @@
+form{
+    width: 50%;
+    margin: auto;
+}
+
+button{
+    margin-top: 10px;
+}
+
+fieldset{
+    margin-bottom: 10px;
+}
+
+input{
+    margin-left: 10px;
+}

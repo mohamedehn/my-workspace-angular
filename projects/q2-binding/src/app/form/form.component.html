@@ -1,0 +1,41 @@
+<form #form="ngForm" (ngSubmit)="onSubmit()">
+    <fieldset>
+        <label for="lastName">Nom</label>
+        <input type="text" required minlength="3" maxlength="15" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel">
+    </fieldset>
+    <!-- Message d'erreurs du Nom -->
+  <div *ngIf="form.submitted && lastName.errors">
+    <span *ngIf="lastName.errors?.['required']">Le champ "nom" est requis</span>
+    <span *ngIf="lastName.errors?.['minlength']">Le champ "nom" doit comporter au moins 3 caractères</span>
+    <span *ngIf="lastName.errors?.['maxlength']">Le champ "nom" ne doit pas dépasser 15 caractères</span>
+  </div>
+    <fieldset>
+        <label for="firstName">Prénom</label>
+        <input type="text" required minlength="3" maxlength="15" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel">
+    </fieldset>
+    <!-- Message d'erreurs du Prénom -->
+  <div *ngIf="form.submitted && firstName.errors">
+    <span *ngIf="firstName.errors?.['required']">Le champ "prénom" est requis</span>
+    <span *ngIf="firstName.errors?.['minlength']">Le champ "prénom" doit comporter au moins 3 caractères</span>
+    <span *ngIf="firstName.errors?.['maxlength']">Le champ "prénom" ne doit pas dépasser 15 caractères</span>
+  </div>
+    <fieldset>
+        <label for="email">Adresse mail</label>
+        <input type="text" required email name="email" [(ngModel)]="model.email" #email="ngModel">
+    </fieldset>
+    <!-- Message d'erreurs du Mail -->
+  <div *ngIf="form.submitted && email.errors">
+    <span *ngIf="email.errors?.['required']">Le champ "mail" est requis</span>
+    <span *ngIf="email.errors?.['email']">L'email est invalide</span>
+  </div>
+    <fieldset>
+        <label for="password">Mot de passe</label>
+        <input type="text"required name="password" [(ngModel)]="model.password" #password="ngModel">
+    </fieldset>
+    <!-- Message d'erreurs du Mot de passe -->
+  <div *ngIf="form.submitted && password.errors">
+    <span *ngIf="password.errors?.['required']">Le champ "mot de passe" est requis</span>
+  </div>
+    <button type="submit">Sauvegarde</button>
+</form>
+
