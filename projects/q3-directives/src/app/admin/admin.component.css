@@ -1,0 +1,26 @@
+.main{
+    display: block;
+    margin: auto;
+    width: 100%;
+}
+
+h1{
+    justify-content: center;
+    display: flex;
+}
+
+.content {
+    justify-content: center;
+    display: flex;
+    width: 24%;
+    margin: auto;
+    justify-content: space-around;
+}
+
+.admin{
+    justify-content: center;
+    display: flex;
+    margin: auto;
+    margin-top: 18px;
+}
+
