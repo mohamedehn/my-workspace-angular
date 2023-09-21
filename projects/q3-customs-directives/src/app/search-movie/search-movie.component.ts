@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 
@@ -7,7 +7,10 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors,
   templateUrl: './search-movie.component.html',
   styleUrls: ['./search-movie.component.css']
 })
-export class SearchMovieComponent {
+
+export class SearchMovieComponent implements OnInit{
+
+  formSubmitted: boolean = false
 
   filmForm = this.fb.group({
     info: new FormGroup({
@@ -17,13 +20,13 @@ export class SearchMovieComponent {
     ),
     type: new FormGroup({
       film: new FormControl(''),
-      serie: new FormControl(''),
-      episode: new FormControl('')
+      serie: new FormControl('serie'),
+      episode: new FormControl(''),
     }),
-    years: new FormControl('', [this.rangeDateValidator()]),
+    years: new FormControl('', [this.rangeDateValidator(1900, new Date().getFullYear())]),
     fiche: new FormGroup({
-      full: new FormControl(''),
-      small: new FormControl('')
+      complete: new FormControl(''),
+      courte: new FormControl('')
     })
   });
 
@@ -31,17 +34,20 @@ export class SearchMovieComponent {
 
   }
 
-  onSubmit() {
-    console.log('filmForm envoyé : ', this.filmForm.value);
+  ngOnInit(): void {
     
   }
 
-  rangeDateValidator(): ValidatorFn{
+  onSubmit() {
+    console.log('filmForm envoyé : ', this.filmForm.value);
+    this.formSubmitted = true;
+  }
+
+  rangeDateValidator(minimum: number, maximum: number): ValidatorFn{
     return (control: AbstractControl) : ValidationErrors | null =>{
       const years = control.value
-      const date = new Date().getFullYear()
-      if(!years || years < 1900 || years > date){
-        return {'rangeDate' : true}
+      if(!years || years < minimum || years > maximum){
+        return {'min' : {min: minimum, max: maximum}}
       }else{
         return null
       }
@@ -60,5 +66,4 @@ export class SearchMovieComponent {
       }
     };    
   }
-  
 }
