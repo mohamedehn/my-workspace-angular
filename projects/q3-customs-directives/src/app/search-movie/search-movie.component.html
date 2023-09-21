@@ -17,10 +17,8 @@
     </div>
     <fieldset formGroupName="type"> 
         <label for="type">Type</label>
-        <select name="type" formControlName="serie">
-            <option value="film">Film</option>
-            <option value="serie">Série</option>
-            <option value="episode">Episode</option>
+        <select name="type" formControlName="details">
+            <option *ngFor="let option of typeDetails" [value]="option.value"> {{ option.label }}</option>
         </select>
     </fieldset>
     <fieldset>
@@ -36,9 +34,8 @@
     </div>
     <fieldset formGroupName="fiche"> 
         <label for="fiche">Fiche</label>
-        <select name="fiche">
-            <option value="complete">Complète</option>
-            <option value="courte">Courte</option>
+        <select name="fiche" formControlName="details">
+            <option *ngFor="let option of ficheDetails" [value]="option.value">{{ option.label }}</option>
         </select>
     </fieldset>
     <button type="submit">Rechercher</button>

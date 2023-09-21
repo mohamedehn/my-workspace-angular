@@ -10,7 +10,18 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors,
 
 export class SearchMovieComponent implements OnInit{
 
-  formSubmitted: boolean = false
+  formSubmitted: boolean = false;
+
+  ficheDetails = [
+    { label: 'Courte', value: 'courte' },
+    { label: 'Complète', value: 'complete' }
+  ];
+
+  typeDetails = [
+    { label: 'Film', value: 'film'},
+    { label: 'Série', value: 'serie'},
+    { label: 'Episode', value: 'episode'},
+  ]
 
   filmForm = this.fb.group({
     info: new FormGroup({
@@ -19,14 +30,11 @@ export class SearchMovieComponent implements OnInit{
       [this.isRequiredValidator('identifier', 'title')]
     ),
     type: new FormGroup({
-      film: new FormControl(''),
-      serie: new FormControl('serie'),
-      episode: new FormControl(''),
+      details: new FormControl('serie'),
     }),
     years: new FormControl('', [this.rangeDateValidator(1900, new Date().getFullYear())]),
     fiche: new FormGroup({
-      complete: new FormControl(''),
-      courte: new FormControl('')
+      details : new FormControl('')
     })
   });
 
@@ -35,7 +43,11 @@ export class SearchMovieComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    
+    this.filmForm.patchValue({
+      fiche: {
+        details: 'courte'
+      }
+    });
   }
 
   onSubmit() {
