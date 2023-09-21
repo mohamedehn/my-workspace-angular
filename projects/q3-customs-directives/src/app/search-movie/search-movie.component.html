@@ -1,0 +1,36 @@
+<form (ngSubmit)="filmForm.valid && onSubmit()" [formGroup]="filmForm" #myForm="ngForm">
+    <div formGroupName="info" name="info">
+        <fieldset>
+            <label for="identifier">Identifiant </label>
+            <input type="text" name="identifier" formControlName="identifier">
+        </fieldset>
+        <fieldset>
+            <label for="title">Titre</label>
+            <input type="text" name="title" formControlName="title">
+        </fieldset>
+    </div>
+    <!-- Messaged d'erreur Identifiant ou Titre -->
+    <div>
+        <span *ngIf="filmForm.controls.info.errors?.['isRequired']">
+            L'un des deux champs 'Identifiant' ou 'Titre' doit être renseigné
+        </span>
+    </div>
+    <fieldset formGroupName="type"> Type
+        Film <input type="text" name="film" formControlName="film">
+        Série <input type="text" name="serie" formControlName="serie">
+        Episode <input type="text" name="episode" formControlName="episode">
+    </fieldset>
+    <fieldset>
+        <label for="years">Année de sortie</label>
+        <input type="number" name="years" formControlName="years">
+    </fieldset>
+    <!-- Message d'erreur pour l'année -->
+    <div>
+        <span *ngIf="filmForm.controls.years.errors?.['rangeDate']">L'année doit être comprise entre 1900 et cette année</span>
+    </div>
+    <fieldset formGroupName="fiche"> Fiche
+        Complète <input type="text" name="full" formControlName="full">
+        Courte <input type="text" name="small" formControlName="small">
+    </fieldset>
+    <button type="submit">Rechercher</button>
+</form>
