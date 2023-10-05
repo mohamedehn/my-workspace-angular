@@ -12,6 +12,7 @@ export class SearchMovieComponent implements OnInit{
 
   formSubmitted: boolean = false;
 
+
   ficheDetails = [
     { label: 'Courte', value: 'courte' },
     { label: 'Complète', value: 'complete' }

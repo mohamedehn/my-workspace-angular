@@ -1,0 +1,20 @@
+form{
+    display: block;
+    margin: auto;
+    width: 50%;
+    margin-top: 90px;
+}
+
+fieldset{
+    display: flex;
+    justify-content: space-between;
+}
+
+input{
+    display: flex;
+    width: 65%;
+}
+
+button{
+    margin-top: 20px;
+}
