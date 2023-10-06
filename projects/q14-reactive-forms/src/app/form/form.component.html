@@ -1,4 +1,4 @@
-<form [formGroup]="userForm"  (ngSubmit)="onSubmit()">
+<form [formGroup]="userForm"  (ngSubmit)="onSubmit()" #myForm="ngForm">
     <fieldset>
         <label for="userName">Nom d'utilisateur : </label>
         <input type="text" formControlName="userName" name="userName">
@@ -12,6 +12,12 @@
             <label for="email">Email</label>
             <input type="text" formControlName="email" name="email">
         </fieldset>
+        <div *ngIf="formSubmitted && userForm.get('credentials.email')?.errors?.['invalidEmailFormat']">
+            <span>Le format de l'email n'est pas valide</span>
+          </div>
+          <div *ngIf="formSubmitted && userForm.get('credentials.email')?.errors?.['emailNotEndingWithWilderSchool']">
+            <span>L'email doit se terminer par wilder.school</span>
+          </div>
         <fieldset>
             <label for="password">Mot de passe</label>
             <input type="text" formControlName="password" name="password">
@@ -32,7 +38,7 @@
             <input type="number" formControlName="number" name="number">
         </fieldset>
     </div>
-    <button type="submit" [disabled]="!userForm.valid">S'inscrire</button>
+    <button type="submit">S'inscrire</button>
 </form>
 
 <div *ngIf="userList.length > 0">

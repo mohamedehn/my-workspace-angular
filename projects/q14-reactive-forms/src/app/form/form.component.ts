@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { User } from '../models/user.model';
+import { emailValidator } from '../email-validator';
 
 
 @Component({
@@ -19,7 +20,7 @@ public newUser = new User(null,{email:null, password:null},{street:null,city:nul
 userForm = this.fb.group({
   userName : ['', Validators.required],
   credentials: this.fb.group({
-    email : [''],
+    email : ['', [Validators.required, emailValidator, Validators.email]],
     password : [''],
   }),
   adress : this.fb.group({
@@ -38,10 +39,10 @@ ngOnInit(): void {
 }
 
 onSubmit(): void {
-  this.formSubmitted = true;
   const formValue = this.userForm.value;
-  // On vérifie que les valeurs sont définies avant de les assigner à newUser
-  if (formValue.userName && formValue.credentials && formValue.adress) {
+  this.formSubmitted = true;
+  // On vérifie que les valeurs sont définies avant de les assigner à newUser + vérification que le formulaire est valid
+  if (formValue.userName && formValue.credentials && formValue.adress && this.userForm.valid) {
       this.newUser = formValue as User;
       console.log(this.newUser);
       this.getUserList();
