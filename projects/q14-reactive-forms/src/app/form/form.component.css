@@ -5,6 +5,10 @@ form{
     margin-top: 90px;
 }
 
+ul{
+    list-style-type: none;
+}
+
 fieldset{
     display: flex;
     justify-content: space-between;

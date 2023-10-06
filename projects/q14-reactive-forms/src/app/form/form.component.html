@@ -3,24 +3,24 @@
         <label for="userName">Nom d'utilisateur : </label>
         <input type="text" formControlName="userName" name="userName">
     </fieldset>
-    <div>
-        <span></span>
+    <div *ngIf="formSubmitted && myForm.controls.userName.errors?.['required']">
+        <span>Il faut renseigné un nom d'utilisateur</span>
     </div>
 
     <fieldset>
         <label for="email">Email</label>
         <input type="text" formControlName="email" name="email">
     </fieldset>
-    <div>
-        <span></span>
+    <div *ngIf="formSubmitted && myForm.controls.email.errors?.['required']">
+        <span>Un email est requis pour continuer</span>
     </div>
 
     <fieldset>
         <label for="password">Mot de passe</label>
         <input type="text" formControlName="password" name="password">
     </fieldset>
-    <div>
-        <span></span>
+    <div *ngIf="formSubmitted && myForm.controls.password.errors?.['required']">
+        <span>La saisie d'un mot de passe est obligatoire</span>
     </div>
 
     <div formGroupName="adress">
@@ -28,31 +28,20 @@
             <label for="street">Rue</label>
             <input type="text" formControlName="street" name="street">
         </fieldset>
-        <div>
-            <span></span>
-        </div>
-
         <fieldset>
             <label for="city">Ville</label>
             <input type="text" formControlName="city" name="city">
         </fieldset>
-        <div>
-            <span></span>
-        </div>
-
         <fieldset>
             <label for="number">Code postal</label>
             <input type="number" formControlName="number" name="number">
         </fieldset>
-        <div>
-            <span></span>
-        </div>
     </div>
     <button type="submit">S'inscrire</button>
 </form>
 
 <div *ngIf="userList.length > 0">
-    <p>Nouveaux utilisateurs enregistrés :</p>
+    <p>Nouveau utilisateur enregistré :</p>
     <ul>
       <li *ngFor="let user of userList">
         <p>Nom d'utilisateur : {{ user.userName }}</p>
