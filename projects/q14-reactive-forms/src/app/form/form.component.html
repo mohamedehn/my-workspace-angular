@@ -1,26 +1,21 @@
-<form [formGroup]="myForm"  (ngSubmit)="onSubmit()">
+<form [formGroup]="userForm"  (ngSubmit)="onSubmit()">
     <fieldset>
         <label for="userName">Nom d'utilisateur : </label>
         <input type="text" formControlName="userName" name="userName">
     </fieldset>
-    <div *ngIf="formSubmitted && myForm.controls.userName.errors?.['required']">
+    <div *ngIf="formSubmitted && userForm.controls.userName.errors?.['required']">
         <span>Il faut renseigné un nom d'utilisateur</span>
     </div>
 
-    <fieldset>
-        <label for="email">Email</label>
-        <input type="text" formControlName="email" name="email">
-    </fieldset>
-    <div *ngIf="formSubmitted && myForm.controls.email.errors?.['required']">
-        <span>Un email est requis pour continuer</span>
-    </div>
-
-    <fieldset>
-        <label for="password">Mot de passe</label>
-        <input type="text" formControlName="password" name="password">
-    </fieldset>
-    <div *ngIf="formSubmitted && myForm.controls.password.errors?.['required']">
-        <span>La saisie d'un mot de passe est obligatoire</span>
+    <div formGroupName="credentials">
+        <fieldset>
+            <label for="email">Email</label>
+            <input type="text" formControlName="email" name="email">
+        </fieldset>
+        <fieldset>
+            <label for="password">Mot de passe</label>
+            <input type="text" formControlName="password" name="password">
+        </fieldset>
     </div>
 
     <div formGroupName="adress">
@@ -37,7 +32,7 @@
             <input type="number" formControlName="number" name="number">
         </fieldset>
     </div>
-    <button type="submit">S'inscrire</button>
+    <button type="submit" [disabled]="!userForm.valid">S'inscrire</button>
 </form>
 
 <div *ngIf="userList.length > 0">
@@ -45,7 +40,7 @@
     <ul>
       <li *ngFor="let user of userList">
         <p>Nom d'utilisateur : {{ user.userName }}</p>
-        <p>Email : {{ user.email }}</p>
+        <p>Email : {{ user.credentials.email }}</p>
         <p>Mot de passe : confidentiel </p>
         <p>Adresse : {{user.adress.street}} {{ user.adress.city}} {{user.adress.number}}</p>
       </li>

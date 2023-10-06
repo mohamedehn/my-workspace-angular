@@ -1,18 +1,19 @@
 export class User{
     userName: string | null;
-    email: string | null;
-    password: string | null;
+    credentials :{
+        email: string | null;
+        password: string | null;
+    }
     adress: {
         street: string | null;
         number: number | null;
         city: string | null;
     }
 
-    constructor(userName: string | null, email: string | null, password: string | null, 
+    constructor(userName: string | null, credentials : {email: string | null, password: string | null}, 
         adress : {street: string | null, number: number | null, city: string | null}){
         this.userName = userName;
-        this.email = email;
-        this.password = password;
+        this.credentials = credentials;
         this.adress = adress;
     }
 }
